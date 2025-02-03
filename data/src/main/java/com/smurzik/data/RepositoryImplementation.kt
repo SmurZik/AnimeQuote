@@ -4,7 +4,7 @@ import com.smurzik.domain.Repository
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RepositoryImpl(
+class RepositoryImplementation(
     private val service: AnimeQuoteService
 ) : Repository {
 
