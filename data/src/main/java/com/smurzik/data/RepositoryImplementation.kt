@@ -16,7 +16,7 @@ class RepositoryImplementation(
 
     override suspend fun loadQuote(): Pair<Boolean, String> {
         return try {
-            val quote = service.animeQuote().quote
+            val quote = service.animeQuote().data.quote
             Pair(true, quote)
         } catch (e: Exception) {
             Pair(false, e.message ?: "error")
