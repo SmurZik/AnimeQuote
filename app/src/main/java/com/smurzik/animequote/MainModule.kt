@@ -1,6 +1,6 @@
 package com.smurzik.animequote
 
-import com.smurzik.data.RepositoryImplementation
+import com.smurzik.mock.RepositoryImplementation
 import com.smurzik.domain.LoadQuoteResult
 import com.smurzik.domain.Repository
 import com.smurzik.presentation.QuoteUiMapper

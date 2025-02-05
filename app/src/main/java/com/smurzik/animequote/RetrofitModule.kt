@@ -1,6 +1,6 @@
 package com.smurzik.animequote
 
-import com.smurzik.data.AnimeQuoteService
+import com.smurzik.mock.AnimeQuoteService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
