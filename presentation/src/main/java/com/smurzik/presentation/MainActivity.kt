@@ -9,7 +9,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel : MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel.liveData.observe(this) {
-            binding.mainTextView.text = it
+            it.show(binding.mainTextView)
         }
 
         viewModel.load()

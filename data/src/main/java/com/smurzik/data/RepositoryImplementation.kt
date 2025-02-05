@@ -1,5 +1,6 @@
 package com.smurzik.data
 
+import com.smurzik.domain.LoadQuoteResult
 import com.smurzik.domain.Repository
 import javax.inject.Inject
 
@@ -7,12 +8,12 @@ class RepositoryImplementation @Inject constructor(
     private val service: AnimeQuoteService
 ) : Repository {
 
-    override suspend fun loadQuote(): Pair<Boolean, String> {
+    override suspend fun loadQuote(): LoadQuoteResult {
         return try {
             val quote = service.animeQuote().data.quote
-            Pair(true, quote)
+            LoadQuoteResult.Success(quote)
         } catch (e: Exception) {
-            Pair(false, e.message ?: "error")
+            LoadQuoteResult.Error(e.message ?: "error")
         }
     }
 }

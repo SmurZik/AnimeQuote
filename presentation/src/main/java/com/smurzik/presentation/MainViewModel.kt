@@ -3,6 +3,7 @@ package com.smurzik.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.smurzik.domain.LoadQuoteResult
 import com.smurzik.domain.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -13,19 +14,21 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val repository: Repository
+    private val repository: Repository,
+    private val mapper: LoadQuoteResult.Mapper<QuoteUiState>
 ) : ViewModel() {
 
-    private val innerLiveData = MutableLiveData<String>()
-    val liveData: LiveData<String>
+    private val innerLiveData = MutableLiveData<QuoteUiState>()
+    val liveData: LiveData<QuoteUiState>
         get() = innerLiveData
 
     private val viewModelScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
     fun load() {
         viewModelScope.launch {
-            val quote = repository.loadQuote().second
-            innerLiveData.value = quote
+            val quoteResult = repository.loadQuote()
+            val uiState = quoteResult.map(mapper)
+            innerLiveData.value = uiState
         }
     }
 }
